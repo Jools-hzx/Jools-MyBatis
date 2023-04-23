@@ -2,7 +2,9 @@ import com.hspedu.entity.Monster;
 import com.hspedu.hzxmybatis.config.HzxMybatisConfig;
 import com.hspedu.hzxmybatis.executor.MyExecutor;
 import com.hspedu.hzxmybatis.mapper.MapperBean;
+import com.hspedu.hzxmybatis.mapper.MonsterMapper;
 import com.hspedu.hzxmybatis.session.HzxSqlSession;
+import com.hspedu.hzxmybatis.session.HzxSqlSessionFactory;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -36,7 +38,7 @@ public class HzxMyBatisTest {
     @Test
     public void queryBySqlSession() {
         HzxSqlSession session = new HzxSqlSession();
-        Object o = session.queryOne();
+        Object o = session.queryOne("select * from monster where id = ?", 1);
         System.out.println("Monster:" + (Monster) o);
     }
 
@@ -47,5 +49,21 @@ public class HzxMyBatisTest {
         for (MapperBean mapperBean : mapperBeanList) {
             System.out.println("mapperBean:" + mapperBean);
         }
+    }
+
+    @Test
+    public void useProxyInstanceTest() {
+        HzxSqlSession hzxSqlSession = new HzxSqlSession();
+        MonsterMapper mapper = hzxSqlSession.getMapper(MonsterMapper.class);
+        Monster monster = mapper.queryOne(1);
+        System.out.println("monster:" + monster);
+    }
+
+    @Test
+    public void useFactoryGetSession() {
+        HzxSqlSession hzxSqlSession = HzxSqlSessionFactory.open();
+        MonsterMapper mapper = hzxSqlSession.getMapper(MonsterMapper.class);
+        Monster monster = mapper.queryOne(1);
+        System.out.println("monster:" + monster);
     }
 }
