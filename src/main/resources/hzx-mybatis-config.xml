@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<database>
+    <!--配置驱动-->
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <!--配置连接的url-->
+    <property name="url" value="jdbc:mysql://localhost:3306/hsp_mybatis?useSSL=true&amp;
+                                            useUnicode=true&amp;characterEncoding=UTF-8"/>
+    <!--配置连接数据库的用户名-->
+    <property name="username" value="root"/>
+    <!--配置连接数据库的密码-->
+    <property name="password" value="hzx"/>
+</database>
