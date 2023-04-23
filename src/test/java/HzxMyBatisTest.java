@@ -1,6 +1,7 @@
 import com.hspedu.entity.Monster;
 import com.hspedu.hzxmybatis.config.HzxMybatisConfig;
 import com.hspedu.hzxmybatis.executor.MyExecutor;
+import com.hspedu.hzxmybatis.session.HzxSqlSession;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -28,5 +29,12 @@ public class HzxMyBatisTest {
         String sql = "select * from monster where id = ?";
         Object o = executor.queryOne(sql, 1);
         System.out.println("monster:" + (Monster) o);
+    }
+
+    @Test
+    public void queryBySqlSession() {
+        HzxSqlSession session = new HzxSqlSession();
+        Object o = session.queryOne();
+        System.out.println("Monster:" + (Monster) o);
     }
 }
