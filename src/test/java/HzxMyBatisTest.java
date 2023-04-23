@@ -1,10 +1,12 @@
 import com.hspedu.entity.Monster;
 import com.hspedu.hzxmybatis.config.HzxMybatisConfig;
 import com.hspedu.hzxmybatis.executor.MyExecutor;
+import com.hspedu.hzxmybatis.mapper.MapperBean;
 import com.hspedu.hzxmybatis.session.HzxSqlSession;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * @author Zexi He.
@@ -36,5 +38,14 @@ public class HzxMyBatisTest {
         HzxSqlSession session = new HzxSqlSession();
         Object o = session.queryOne();
         System.out.println("Monster:" + (Monster) o);
+    }
+
+    @Test
+    public void scanMapperTest() {
+        HzxMybatisConfig hzxMybatisConfig = HzxMybatisConfig.getInstance();
+        List<MapperBean> mapperBeanList = hzxMybatisConfig.getMapperBeanList();
+        for (MapperBean mapperBean : mapperBeanList) {
+            System.out.println("mapperBean:" + mapperBean);
+        }
     }
 }
